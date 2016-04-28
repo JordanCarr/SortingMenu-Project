@@ -27,7 +27,7 @@ class Menu {
                 if (i % 2 == 0 && i % 5 == 0) {
                     System.out.print("\n");
                 }
-                System.out.print(dataSet[i]);
+                System.out.print(dataSet[i - 1]);
             }
             System.out.print("\n");
 
@@ -77,13 +77,11 @@ class Menu {
                 }
             } while (exit == -1);
             System.exit(exit);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            exit = 2;
-            System.err.print("Error in menu(): " + e + "\nError Code: " + exit);
-            System.exit(exit);
         } catch (Exception e) {
+            System.err.println("Error in menu(): ");
+            e.printStackTrace();
+            System.err.print("\nThe cause was: " + e.getCause() + "\n");
             exit = 1;
-            System.err.print("Error in menu(): " + e + "\nError Code: " + exit);
             System.exit(exit);
         }
     }
