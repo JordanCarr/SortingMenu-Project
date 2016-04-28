@@ -16,10 +16,10 @@
      - iteration counter
      - output: data set, duration and, iterations
    - insertion
-     - ~~sort implemented~~
-     - ~~duration measure~~
-     - ~~iteration counter~~
-     - ~~output: data set, duration and, iterations~~
+     - sort implemented
+     - duration measure
+     - iteration counter
+     - output: data set, duration and, iterations
    - selection:
      - ~~sort implemented~~
      - ~~duration measure~~
