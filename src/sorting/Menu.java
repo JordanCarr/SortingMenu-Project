@@ -48,23 +48,23 @@ class Menu {
                 switch (sel) {
                     case "one":
                     case "1":
-                        BubbleSort(dataSet);
+                        BubbleSort(dataSet.clone());
                         break;
                     case "two":
                     case "2":
-                        InsertionSort(dataSet);
+                        InsertionSort(dataSet.clone());
                         break;
                     case "three":
                     case "3":
-                        SelectionSort(dataSet);
+                        SelectionSort(dataSet.clone());
                         break;
                     case "four":
                     case "4":
-                        MergeSort(dataSet);
+                        MergeSort(dataSet.clone());
                         break;
                     case "five":
                     case "5":
-                        QuickSort(dataSet);
+                        QuickSort(dataSet.clone());
                         break;
                     case "q":
                     case "Q":
@@ -88,21 +88,20 @@ class Menu {
 
     private static void BubbleSort(int[] input) {
         double start = System.nanoTime();
-        @SuppressWarnings("UnnecessaryLocalVariable") int[] manipulatedArray = input;
         long iterations = 0;
         int swap;
-        for (int i = 0; i < (manipulatedArray.length - 1); i++) {
-            for (int j = 0; j < manipulatedArray.length - 1; j++) {
-                if (manipulatedArray[j] > manipulatedArray[j + 1]) {
-                    swap = manipulatedArray[j];
-                    manipulatedArray[j] = manipulatedArray[j + 1];
-                    manipulatedArray[j + 1] = swap;
+        for (int i = 0; i < (input.length - 1); i++) {
+            for (int j = 0; j < input.length - 1; j++) {
+                if (input[j] > input[j + 1]) {
+                    swap = input[j];
+                    input[j] = input[j + 1];
+                    input[j + 1] = swap;
                     iterations++;
                 }
             }
         }
 
-        printArray(manipulatedArray);
+        printArray(input);
 
         double end = System.nanoTime();
         System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
@@ -111,7 +110,6 @@ class Menu {
 
     private static void InsertionSort(int[] input) {
         double start = System.nanoTime();
-        @SuppressWarnings("UnnecessaryLocalVariable") int[] manipulatedArray = input;
         long iterations = 0;
         int insert;
         int i;
@@ -124,7 +122,7 @@ class Menu {
             input[i + 1] = insert;
         }
 
-        printArray(manipulatedArray);
+        printArray(input);
 
         double end = System.nanoTime();
         System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
@@ -133,16 +131,22 @@ class Menu {
 
     private static void SelectionSort(int[] input) {
         double start = System.nanoTime();
-        @SuppressWarnings("UnnecessaryLocalVariable") int[] manipulatedArray = input;
         long iterations = 0;
 
-
-        for (int i = 0; i < manipulatedArray.length; i++) {
-            if (i % 10 == 0) {
-                System.out.print("\n");
+        int i, j, f, tmp;
+        for (i = input.length - 1; i > 0; i--) {
+            f = 0;
+            for (j = 1; j <= i; j++) {
+                if (input[j] > input[f])
+                    f = j;
+                iterations++;
             }
-            System.out.print(manipulatedArray[i] + "\t");
+            tmp = input[f];
+            input[f] = input[i];
+            input[i] = tmp;
         }
+
+        printArray(input);
 
         double end = System.nanoTime();
         System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
