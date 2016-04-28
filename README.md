@@ -9,7 +9,29 @@
 
 ## Currently Implemented Goals
  - Generate a data set with 10~~000~~ number in it.
- - Use the following ~~five~~ sort~~s~~ on the data: bubble~~, insertion,~~ ~~selection,~~ ~~merge and,~~ ~~quick~~.
- - ~~Determine how long the sort took to complete.~~
- - Count the iterations in each sort.
- - Output the sorted data along with the ~~time taken to complete and~~ the iterations taken to complete.
+ - Sorts:
+   - bubble:
+     - sort implemented
+     - duration measure
+     - iteration counter
+     - output: data set, duration and, iterations
+   - insertion
+     - ~~sort implemented~~
+     - ~~duration measure~~
+     - ~~iteration counter~~
+     - ~~output: data set, duration and, iterations~~
+   - selection:
+     - ~~sort implemented~~
+     - ~~duration measure~~
+     - ~~iteration counter~~
+     - ~~output: data set, duration and, iterations~~
+   - merge:
+     - ~~sort implemented~~
+     - ~~duration measure~~
+     - ~~iteration counter~~
+     - ~~output: data set, duration and, iterations~~
+   - quick:
+     - ~~sort implemented~~
+     - ~~duration measure~~
+     - ~~iteration counter~~
+     - ~~output: data set, duration and, iterations~~
