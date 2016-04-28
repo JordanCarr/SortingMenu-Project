@@ -102,12 +102,7 @@ class Menu {
             }
         }
 
-        for (int i = 0; i < manipulatedArray.length; i++) {
-            if (i % 10 == 0) {
-                System.out.print("\n");
-            }
-            System.out.print(manipulatedArray[i] + "\t");
-        }
+        printArray(manipulatedArray);
 
         double end = System.nanoTime();
         System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
@@ -122,19 +117,14 @@ class Menu {
         int i;
         for (int j = 1; j < input.length; j++) {
             insert = input[j];
-            for (i = j - 1; (i >= 0) && (input[i] < insert); i--) {
+            for (i = j - 1; (i >= 0) && (input[i] > insert); i--) {
                 input[i + 1] = input[i];
                 iterations++;
             }
             input[i + 1] = insert;
         }
 
-        for (int n = 0; n < manipulatedArray.length; n++) {
-            if (n % 10 == 0) {
-                System.out.print("\n");
-            }
-            System.out.print(manipulatedArray[n] + "\t");
-        }
+        printArray(manipulatedArray);
 
         double end = System.nanoTime();
         System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
@@ -142,8 +132,21 @@ class Menu {
     }
 
     private static void SelectionSort(int[] input) {
+        double start = System.nanoTime();
         @SuppressWarnings("UnnecessaryLocalVariable") int[] manipulatedArray = input;
+        long iterations = 0;
 
+
+        for (int i = 0; i < manipulatedArray.length; i++) {
+            if (i % 10 == 0) {
+                System.out.print("\n");
+            }
+            System.out.print(manipulatedArray[i] + "\t");
+        }
+
+        double end = System.nanoTime();
+        System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
+                " milliseconds(s)\n");
     }
 
     private static void MergeSort(int[] input) {
@@ -152,5 +155,14 @@ class Menu {
 
     private static void QuickSort(int[] input) {
         @SuppressWarnings("UnnecessaryLocalVariable") int[] manipulatedArray = input;
+    }
+
+    private static void printArray(int[] input) {
+        for (int n = 0; n < input.length; n++) {
+            if (n % 10 == 0) {
+                System.out.print("\n");
+            }
+            System.out.print(input[n] + "\t");
+        }
     }
 }
