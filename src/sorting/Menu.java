@@ -20,16 +20,16 @@ class Menu {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
             Random random = new Random();
-            int[] dataSet = new int[100];
+            int[] dataSet = new int[10000];
             for (int i = 0; i < dataSet.length; i++) {
-                dataSet[i] = random.nextInt(10);
+                dataSet[i] = random.nextInt();
 
-                if (i % 2 == 0 && i % 5 == 0) {
+                /*if (i % 2 == 0 && i % 5 == 0) {
                     System.out.print("\n");
                 }
-                System.out.print(dataSet[i]);
+                System.out.print(dataSet[i]);*/
             }
-            System.out.print("\n");
+            //System.out.print("\n");
 
             do {
                 System.out.println("Please choose a sorting method from the menu below:");
@@ -87,8 +87,8 @@ class Menu {
     }
 
     private static void BubbleSort(int[] input) {
-        //noinspection UnnecessaryLocalVariable
-        int[] manipulatedArray = input;
+        double start = System.nanoTime();
+        @SuppressWarnings("UnnecessaryLocalVariable") int[] manipulatedArray = input;
         long permutations = 0;
         int swap;
         for (int i = 0; i < (manipulatedArray.length - 1); i++) {
@@ -103,35 +103,34 @@ class Menu {
         }
 
         for (int i = 0; i < manipulatedArray.length; i++) {
-            if (i % 2 == 0 && i % 5 == 0) {
+            if (i % 10 == 0) {
                 System.out.print("\n");
             }
-            System.out.print(manipulatedArray[i]);
+            System.out.print(manipulatedArray[i] + "\t");
         }
-        System.out.println("\nPermutations: " + permutations + "\n");
+
+        double end = System.nanoTime();
+        System.out.println("\nPermutations: " + permutations + "\nDuration: " + ((end - start) / 100000) +
+                " milliseconds(s)\n");
     }
 
     private static void InsertionSort(int[] input) {
-        //noinspection UnnecessaryLocalVariable,UnnecessaryLocalVariable
-        int[] manipulatedArray = input;
+        @SuppressWarnings("UnnecessaryLocalVariable") int[] manipulatedArray = input;
         long permutations = 0;
     }
 
     private static void SelectionSort(int[] input) {
-        //noinspection UnnecessaryLocalVariable
-        int[] manipulatedArray = input;
+        @SuppressWarnings("UnnecessaryLocalVariable") int[] manipulatedArray = input;
         long permutations = 0;
     }
 
     private static void MergeSort(int[] input) {
-        //noinspection UnnecessaryLocalVariable
-        int[] manipulatedArray = input;
+        @SuppressWarnings("UnnecessaryLocalVariable") int[] manipulatedArray = input;
         long permutations = 0;
     }
 
     private static void QuickSort(int[] input) {
-        //noinspection UnnecessaryLocalVariable
-        int[] manipulatedArray = input;
+        @SuppressWarnings("UnnecessaryLocalVariable") int[] manipulatedArray = input;
         long permutations = 0;
     }
 }
