@@ -27,7 +27,7 @@ class Menu {
                 if (i % 2 == 0 && i % 5 == 0) {
                     System.out.print("\n");
                 }
-                System.out.print(dataSet[i - 1]);
+                System.out.print(dataSet[i]);
             }
             System.out.print("\n");
 
