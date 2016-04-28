@@ -27,7 +27,6 @@ class Menu {
             }
             System.out.print("\n");
 
-
             do {
                 System.out.println("Please choose a sorting method from the menu below:");
                 System.out.print("[1] Bubble Sort\n[2] Insertion Sort\n[3] Selection Sort\n[4] Merge Sort\n[5] Quick " +
@@ -43,18 +42,23 @@ class Menu {
                 }
 
                 switch (sel) {
+                    case "one":
                     case "1":
                         BubbleSort(dataSet);
                         break;
+                    case "two":
                     case "2":
                         InsertionSort(dataSet);
                         break;
+                    case "three":
                     case "3":
                         SelectionSort(dataSet);
                         break;
+                    case "four":
                     case "4":
                         MergeSort(dataSet);
                         break;
+                    case "five":
                     case "5":
                         QuickSort(dataSet);
                         break;
