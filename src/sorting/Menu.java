@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 import java.util.Random;
 
 class Menu {
-    private static int exit = 0;
+    private static int exit = -1;
 
     public static void main(String[] args) {
         menu();
@@ -61,16 +61,22 @@ class Menu {
                     case "q":
                     case "Q":
                         System.out.print("Exiting...");
-                        System.exit(0);
+                        exit = 0;
                         break;
                     default:
                         System.out.println("Improper input received");
                         break;
                 }
-            } while (exit != 1);
+            } while (exit == -1);
+            System.exit(exit);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            exit = 2;
+            System.err.print("Error in menu(): " + e + "\nError Code: " + exit);
+            System.exit(exit);
         } catch (Exception e) {
             exit = 1;
-            System.err.print("Error in menu(): " + e);
+            System.err.print("Error in menu(): " + e + "\nError Code: " + exit);
+            System.exit(exit);
         }
     }
 
