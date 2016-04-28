@@ -20,10 +20,14 @@ class Menu {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
             Random random = new Random();
-            int[] dataSet = new int[10];
+            int[] dataSet = new int[100];
             for (int i = 0; i < dataSet.length; i++) {
                 dataSet[i] = random.nextInt(10);
-                System.out.println(dataSet[i]);
+
+                if (i % 2 == 0 && i % 5 == 0) {
+                    System.out.print("\n");
+                }
+                System.out.print(dataSet[i]);
             }
             System.out.print("\n");
 
@@ -85,42 +89,51 @@ class Menu {
     }
 
     private static void BubbleSort(int[] input) {
-        int[] sortedArray = input;
+        //noinspection UnnecessaryLocalVariable
+        int[] manipulatedArray = input;
         long permutations = 0;
         int swap;
-        for (int i = 0; i < (sortedArray.length - 1); i++) {
-            for (int j = 0; j < sortedArray.length - 1; j++) {
-                if (sortedArray[j] > sortedArray[j + 1]) {
-                    swap = sortedArray[j];
-                    sortedArray[j] = sortedArray[j + 1];
-                    sortedArray[j + 1] = swap;
+        for (int i = 0; i < (manipulatedArray.length - 1); i++) {
+            for (int j = 0; j < manipulatedArray.length - 1; j++) {
+                if (manipulatedArray[j] > manipulatedArray[j + 1]) {
+                    swap = manipulatedArray[j];
+                    manipulatedArray[j] = manipulatedArray[j + 1];
+                    manipulatedArray[j + 1] = swap;
                     permutations++;
                 }
             }
         }
 
-        for (int aSortedArray : sortedArray) {
-            if (aSortedArray % 2 == 0 && aSortedArray % 5 == 0) {
+        for (int i = 0; i < manipulatedArray.length; i++) {
+            if (i % 2 == 0 && i % 5 == 0) {
                 System.out.print("\n");
             }
-            System.out.print(aSortedArray);
+            System.out.print(manipulatedArray[i]);
         }
-        System.out.println("Permutations: " + permutations);
+        System.out.println("\nPermutations: " + permutations + "\n");
     }
 
     private static void InsertionSort(int[] input) {
-        System.out.println("\nInsertionSort\n" + input.length);
+        //noinspection UnnecessaryLocalVariable,UnnecessaryLocalVariable
+        int[] manipulatedArray = input;
+        long permutations = 0;
     }
 
     private static void SelectionSort(int[] input) {
-        System.out.println("\nSelectionSort\n" + input.length);
+        //noinspection UnnecessaryLocalVariable
+        int[] manipulatedArray = input;
+        long permutations = 0;
     }
 
     private static void MergeSort(int[] input) {
-        System.out.println("\nMergeSort\n" + input.length);
+        //noinspection UnnecessaryLocalVariable
+        int[] manipulatedArray = input;
+        long permutations = 0;
     }
 
     private static void QuickSort(int[] input) {
-        System.out.println("\nQuickSort\n" + input.length);
+        //noinspection UnnecessaryLocalVariable
+        int[] manipulatedArray = input;
+        long permutations = 0;
     }
 }
