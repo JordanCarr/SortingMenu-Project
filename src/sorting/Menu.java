@@ -8,9 +8,23 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Random;
 
+/**
+ * Objectives of this program:
+ * - Generate a data set with 10,000 numbers in it.
+ * - Use the following five sorts on the data: bubble, insertion, selection, merge, and quick.
+ * - Determine how long the sort took to complete.
+ * - Count the iteration in each sort.
+ * - Output the sorted data along with the time taken to complete and the iterations taken to complete.
+ */
 class Menu {
     private static int exit = -1;
 
+    /**
+     * The main method runs the menu for interfacing with the user and also handles any errors thrown throuought the
+     * program.
+     *
+     * @param args There are no aregs for this program.
+     */
     public static void main(String[] args) {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -75,6 +89,10 @@ class Menu {
         }
     }
 
+    /**
+     * BubbleSort, sorts the data from input using the bubble sort algorithm.
+     * @param input The input is the 10000 number random integer data set.
+     */
     private static void BubbleSort(int[] input) {
         double start = System.nanoTime();
         long iterations = 0;
@@ -98,6 +116,10 @@ class Menu {
                 " milliseconds(s)\n");
     }
 
+    /**
+     * InsertionSort, sorts the data from input using the insertion sort algorithm.
+     * @param input The input is the 10000 number random integer data set.
+     */
     private static void InsertionSort(int[] input) {
         double start = System.nanoTime();
         long iterations = 0;
@@ -121,6 +143,10 @@ class Menu {
                 " milliseconds(s)\n");
     }
 
+    /**
+     * InsertionSort, sorts the data from input using the insertion sort algorithm.
+     * @param input The input is the 10000 number random integer data set.
+     */
     private static void SelectionSort(int[] input) {
         double start = System.nanoTime();
         long iterations = 0;
@@ -146,10 +172,14 @@ class Menu {
                 " milliseconds(s)\n");
     }
 
+    /**
+     * SelectionSort, sorts the data from input using the selection sort algorithm.
+     * @param input The input is the 10000 number random integer data set.
+     */
     private static void MergeSort(int[] input) {
         double start = System.nanoTime();
 
-        long iterations = 0;
+        long iterations = 0L;
 
         iterations = sortMergeSort(input, 0, (input.length - 1), iterations);
 
@@ -161,33 +191,50 @@ class Menu {
                 " milliseconds(s)\n");
     }
 
-    private static long sortMergeSort(int a[], int left, int right, long iterations) {
+    /**
+     * Taking input, left, right and, iterations as inputs it sorts the data in the sections defined earlier.
+     *
+     * @param input The input is the 10000 number random integer data set.
+     * @param left  The left side that the sort deals with.
+     * @param right The right side that the sort deals with.
+     * @return Returns the number of iterations for the sort to complete.
+     */
+    private static long sortMergeSort(int[] input, int left, int right, long iterations) {
 
-        if (right == left) return 1;
+        if (right == left) {
+            return iterations;}
         int middle = (left + right) / 2; //salient feature
 
         iterations++;
-        sortMergeSort(a, left, middle, iterations); //salient feature #1 (recursion)
-        sortMergeSort(a, middle + 1, right, iterations); //salient feature #2
-        mergeMergeSort(a, left, middle, right); //salient feature #3
+        sortMergeSort(input, left, middle, iterations); //salient feature #1 (recursion)
+        sortMergeSort(input, middle + 1, right, iterations); //salient feature #2
+        mergeMergeSort(input, left, middle, right); //salient feature #3
         return iterations;
     }
 
-    private static void mergeMergeSort(int a[], int left, int middle, int right) {
+    /**
+     * Merges the sorted sections of input.
+     *
+     * @param input  The input is the 10000 number random integer data set.
+     * @param left   The left side that the sort deals with.
+     * @param middle To keep track of where the middle is before and during merge.
+     * @param right  The right side that the sort deals with.
+     */
+    private static void mergeMergeSort(int input[], int left, int middle, int right) {
         //This temporary array will be used to build the merged list
         int tmpArray[] = new int[right - left + 1];
-        //This creation of a temporary array is a BIG feature of the merge sort.
+        //This creation of input temporary array is input BIG feature of the merge sort.
         int index1 = left;
         int index2 = middle + 1;
         int indx = 0;
         //Loop until one of the sublists is finished, adding the smaller of the first
         //elements of each sublist to the merged list.
         while (index1 <= middle && index2 <= right) {
-            if (a[index1] < a[index2]) {
-                tmpArray[indx] = a[index1];
+            if (input[index1] < input[index2]) {
+                tmpArray[indx] = input[index1];
                 index1++;
             } else {
-                tmpArray[indx] = a[index2];
+                tmpArray[indx] = input[index2];
                 index2++;
             }
             indx++;
@@ -195,21 +242,26 @@ class Menu {
         //Add to the merged list the remaining elements of whichever sublist is
         //not yet finished
         while (index1 <= middle) {
-            tmpArray[indx] = a[index1];
+            tmpArray[indx] = input[index1];
             index1++;
             indx++;
         }
         while (index2 <= right) {
-            tmpArray[indx] = a[index2];
+            tmpArray[indx] = input[index2];
             index2++;
             indx++;
         }
-//Copy the merged list from the tmpArray array into the a array
+//Copy the merged list from the tmpArray array into the input array
         for (indx = 0; indx < tmpArray.length; indx++) {
-            a[left + indx] = tmpArray[indx];
+            input[left + indx] = tmpArray[indx];
         }
     }
 
+    /**
+     * Takes start and end times for duration as well as passing the proper data onto the sortQuickSort
+     * method where the quick sort algorithm is used.
+     * @param input The input is the 10000 number random integer data set.
+     */
     private static void QuickSort(int[] input) {
         double start = System.nanoTime();
         long iterations = 0;
@@ -226,6 +278,14 @@ class Menu {
                 " milliseconds(s)\n");
     }
 
+    /**
+     * Starts the duration and iteration measures and passes the appropriate data to sortQuickSort.
+     * @param input The input is the 10000 number random integer data set.
+     * @param left The left side that the sort deals with.
+     * @param right The right side that the sort deals with.
+     * @param iterations Takes in an initial iteration number that is then iterated on each sort algorithm iteration.
+     * @return Returns the number of iterations for the sort to complete.
+     */
     private static long sortQuickSort(int[] input, int left, int right, long iterations) {
         if (left >= right) {
             return iterations;
@@ -256,9 +316,15 @@ class Menu {
         return iterations;
     }
 
+    /**
+     * Apples the quick sort algorith with the data passed to it from QuickSort.
+     * Takes the array created by one of the sorting methods and prints it to screen as per program specifications.
+     * This output is formatted to help legibility.
+     * @param arrayToPrint Takes a sorted array and then prints that array to screen.
+     */
     private static void printArray(int[] arrayToPrint) {
         for (int n = 0; n < arrayToPrint.length; n++) {
-            if (n % 10 == 0) {
+            if (n % 18 == 0) {
                 System.out.print("\n");
             }
             System.out.print(arrayToPrint[n] + "\t");
