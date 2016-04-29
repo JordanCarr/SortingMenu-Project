@@ -12,10 +12,6 @@ class Menu {
     private static int exit = -1;
 
     public static void main(String[] args) {
-        menu();
-    }
-
-    private static void menu() {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -23,13 +19,7 @@ class Menu {
             int[] dataSet = new int[10000];
             for (int i = 0; i < dataSet.length; i++) {
                 dataSet[i] = random.nextInt();
-
-                /*if (i % 2 == 0 && i % 5 == 0) {
-                    System.out.print("\n");
-                }
-                System.out.print(dataSet[i]);*/
             }
-            //System.out.print("\n");
 
             do {
                 System.out.println("Please choose a sorting method from the menu below:");
@@ -78,7 +68,6 @@ class Menu {
             } while (exit == -1);
             System.exit(exit);
         } catch (Exception e) {
-            System.err.println("Error in menu(): ");
             e.printStackTrace();
             System.err.print("\nThe cause was: " + e.getCause() + "\n");
             exit = 1;
@@ -101,9 +90,10 @@ class Menu {
             }
         }
 
+        double end = System.nanoTime();
+
         printArray(input);
 
-        double end = System.nanoTime();
         System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
                 " milliseconds(s)\n");
     }
@@ -122,9 +112,11 @@ class Menu {
             input[i + 1] = insert;
         }
 
+        double end = System.nanoTime();
+
         printArray(input);
 
-        double end = System.nanoTime();
+
         System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
                 " milliseconds(s)\n");
     }
@@ -146,27 +138,130 @@ class Menu {
             input[i] = tmp;
         }
 
+        double end = System.nanoTime();
+
         printArray(input);
 
-        double end = System.nanoTime();
         System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
                 " milliseconds(s)\n");
     }
 
     private static void MergeSort(int[] input) {
-        @SuppressWarnings("UnnecessaryLocalVariable") int[] manipulatedArray = input;
+        double start = System.nanoTime();
+
+        long iterations = 0;
+
+        iterations = sortMergeSort(input, 0, (input.length - 1), iterations);
+
+        double end = System.nanoTime();
+
+        printArray(input);
+
+        System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
+                " milliseconds(s)\n");
+    }
+
+    private static long sortMergeSort(int a[], int left, int right, long iterations) {
+
+        if (right == left) return 1;
+        int middle = (left + right) / 2; //salient feature
+
+        iterations++;
+        sortMergeSort(a, left, middle, iterations); //salient feature #1 (recursion)
+        sortMergeSort(a, middle + 1, right, iterations); //salient feature #2
+        mergeMergeSort(a, left, middle, right); //salient feature #3
+        return iterations;
+    }
+
+    private static void mergeMergeSort(int a[], int left, int middle, int right) {
+        //This temporary array will be used to build the merged list
+        int tmpArray[] = new int[right - left + 1];
+        //This creation of a temporary array is a BIG feature of the merge sort.
+        int index1 = left;
+        int index2 = middle + 1;
+        int indx = 0;
+        //Loop until one of the sublists is finished, adding the smaller of the first
+        //elements of each sublist to the merged list.
+        while (index1 <= middle && index2 <= right) {
+            if (a[index1] < a[index2]) {
+                tmpArray[indx] = a[index1];
+                index1++;
+            } else {
+                tmpArray[indx] = a[index2];
+                index2++;
+            }
+            indx++;
+        }
+        //Add to the merged list the remaining elements of whichever sublist is
+        //not yet finished
+        while (index1 <= middle) {
+            tmpArray[indx] = a[index1];
+            index1++;
+            indx++;
+        }
+        while (index2 <= right) {
+            tmpArray[indx] = a[index2];
+            index2++;
+            indx++;
+        }
+//Copy the merged list from the tmpArray array into the a array
+        for (indx = 0; indx < tmpArray.length; indx++) {
+            a[left + indx] = tmpArray[indx];
+        }
     }
 
     private static void QuickSort(int[] input) {
-        @SuppressWarnings("UnnecessaryLocalVariable") int[] manipulatedArray = input;
+        double start = System.nanoTime();
+        long iterations = 0;
+
+        int left = 0;
+        int right = (input.length - 1);
+        iterations = sortQuickSort(input, left, right, iterations);
+
+        double end = System.nanoTime();
+
+        printArray(input);
+
+        System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
+                " milliseconds(s)\n");
     }
 
-    private static void printArray(int[] input) {
-        for (int n = 0; n < input.length; n++) {
+    private static long sortQuickSort(int[] input, int left, int right, long iterations) {
+        if (left >= right) {
+            return iterations;
+        }
+
+        int k = left;
+        int j = right;
+        int pivotValue = input[(left + right) / 2]; // salient feature
+        while (k < j) {
+            while (input[k] < pivotValue) //salient feature (pivot point)
+            {
+                k++;
+            }
+            while (pivotValue < input[j]) {
+                j--;
+            }
+            if (k <= j) {
+                int temp = input[k]; //swap a[k] and a[j]
+                input[k] = input[j];
+                input[j] = temp;
+                k++;
+                j--;
+                iterations++;
+            }
+        }
+        sortQuickSort(input, left, j, iterations); //salient feature (recursion)
+        sortQuickSort(input, k, right, iterations);
+        return iterations;
+    }
+
+    private static void printArray(int[] arrayToPrint) {
+        for (int n = 0; n < arrayToPrint.length; n++) {
             if (n % 10 == 0) {
                 System.out.print("\n");
             }
-            System.out.print(input[n] + "\t");
+            System.out.print(arrayToPrint[n] + "\t");
         }
     }
 }
