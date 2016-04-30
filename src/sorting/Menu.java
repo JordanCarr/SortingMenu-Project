@@ -18,29 +18,23 @@ import java.util.Random;
  */
 class Menu {
     private static int exit = -1;
-
     /**
-     * The main method runs the menu for interfacing with the user and also handles any errors thrown throuought the
-     * program.
-     *
-     * @param args There are no aregs for this program.
+     * The main method runs the menu for interfacing with the user and also handles any errors thrown throughout the program.
+     * @param args There are no args for this program.
      */
     public static void main(String[] args) {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
             Random random = new Random();
             int[] dataSet = new int[10000];
             for (int i = 0; i < dataSet.length; i++) {
                 dataSet[i] = random.nextInt();
             }
-
             do {
                 System.out.println("Please choose a sorting method from the menu below:");
                 System.out.print("[1] Bubble Sort\n[2] Insertion Sort\n[3] Selection Sort\n[4] Merge Sort\n[5] Quick " +
                         "Sort\n[Q] Quit\n");
                 System.out.print("Selection: ");
-
                 String sel;
                 try {
                     sel = br.readLine();
@@ -48,7 +42,6 @@ class Menu {
                     System.out.println("That is not a valid input");
                     sel = " ";
                 }
-
                 switch (sel) {
                     case "one":
                     case "1":
@@ -107,11 +100,8 @@ class Menu {
                 }
             }
         }
-
         double end = System.nanoTime();
-
         printArray(input);
-
         System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
                 " milliseconds(s)\n");
     }
@@ -133,12 +123,8 @@ class Menu {
             }
             input[i + 1] = insert;
         }
-
         double end = System.nanoTime();
-
         printArray(input);
-
-
         System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
                 " milliseconds(s)\n");
     }
@@ -150,7 +136,6 @@ class Menu {
     private static void SelectionSort(int[] input) {
         double start = System.nanoTime();
         long iterations = 0;
-
         int i, j, f, tmp;
         for (i = input.length - 1; i > 0; i--) {
             f = 0;
@@ -163,11 +148,8 @@ class Menu {
             input[f] = input[i];
             input[i] = tmp;
         }
-
         double end = System.nanoTime();
-
         printArray(input);
-
         System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
                 " milliseconds(s)\n");
     }
@@ -178,15 +160,10 @@ class Menu {
      */
     private static void MergeSort(int[] input) {
         double start = System.nanoTime();
-
         long iterations = 0L;
-
         iterations = sortMergeSort(input, 0, (input.length - 1), iterations);
-
         double end = System.nanoTime();
-
         printArray(input);
-
         System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
                 " milliseconds(s)\n");
     }
@@ -200,35 +177,31 @@ class Menu {
      * @return Returns the number of iterations for the sort to complete.
      */
     private static long sortMergeSort(int[] input, int left, int right, long iterations) {
-
         if (right == left) {
             return iterations;}
-        int middle = (left + right) / 2; //salient feature
-
+        int middle = (left + right) / 2;
         iterations++;
-        sortMergeSort(input, left, middle, iterations); //salient feature #1 (recursion)
-        sortMergeSort(input, middle + 1, right, iterations); //salient feature #2
-        mergeMergeSort(input, left, middle, right); //salient feature #3
+        sortMergeSort(input, left, middle, iterations);
+        sortMergeSort(input, middle + 1, right, iterations);
+        mergeMergeSort(input, left, middle, right);
         return iterations;
     }
 
     /**
      * Merges the sorted sections of input.
-     *
      * @param input  The input is the 10000 number random integer data set.
      * @param left   The left side that the sort deals with.
      * @param middle To keep track of where the middle is before and during merge.
      * @param right  The right side that the sort deals with.
      */
     private static void mergeMergeSort(int input[], int left, int middle, int right) {
-        //This temporary array will be used to build the merged list
+
         int tmpArray[] = new int[right - left + 1];
-        //This creation of input temporary array is input BIG feature of the merge sort.
+
         int index1 = left;
         int index2 = middle + 1;
         int indx = 0;
-        //Loop until one of the sublists is finished, adding the smaller of the first
-        //elements of each sublist to the merged list.
+
         while (index1 <= middle && index2 <= right) {
             if (input[index1] < input[index2]) {
                 tmpArray[indx] = input[index1];
@@ -239,8 +212,7 @@ class Menu {
             }
             indx++;
         }
-        //Add to the merged list the remaining elements of whichever sublist is
-        //not yet finished
+
         while (index1 <= middle) {
             tmpArray[indx] = input[index1];
             index1++;
@@ -251,7 +223,7 @@ class Menu {
             index2++;
             indx++;
         }
-//Copy the merged list from the tmpArray array into the input array
+
         for (indx = 0; indx < tmpArray.length; indx++) {
             input[left + indx] = tmpArray[indx];
         }
@@ -265,15 +237,11 @@ class Menu {
     private static void QuickSort(int[] input) {
         double start = System.nanoTime();
         long iterations = 0;
-
         int left = 0;
         int right = (input.length - 1);
         iterations = sortQuickSort(input, left, right, iterations);
-
         double end = System.nanoTime();
-
         printArray(input);
-
         System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
                 " milliseconds(s)\n");
     }
@@ -290,12 +258,11 @@ class Menu {
         if (left >= right) {
             return iterations;
         }
-
         int k = left;
         int j = right;
-        int pivotValue = input[(left + right) / 2]; // salient feature
+        int pivotValue = input[(left + right) / 2];
         while (k < j) {
-            while (input[k] < pivotValue) //salient feature (pivot point)
+            while (input[k] < pivotValue)
             {
                 k++;
             }
@@ -303,7 +270,7 @@ class Menu {
                 j--;
             }
             if (k <= j) {
-                int temp = input[k]; //swap a[k] and a[j]
+                int temp = input[k];
                 input[k] = input[j];
                 input[j] = temp;
                 k++;
@@ -311,13 +278,13 @@ class Menu {
                 iterations++;
             }
         }
-        sortQuickSort(input, left, j, iterations); //salient feature (recursion)
+        sortQuickSort(input, left, j, iterations);
         sortQuickSort(input, k, right, iterations);
         return iterations;
     }
 
     /**
-     * Apples the quick sort algorith with the data passed to it from QuickSort.
+     * Apples the quick sort algorithm with the data passed to it from QuickSort.
      * Takes the array created by one of the sorting methods and prints it to screen as per program specifications.
      * This output is formatted to help legibility.
      * @param arrayToPrint Takes a sorted array and then prints that array to screen.
