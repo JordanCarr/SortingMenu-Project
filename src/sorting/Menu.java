@@ -1,5 +1,8 @@
 /*
  * Copyright 2016 Jordan Carr
+ * Project Name: SortingMenu-Project
+ * Class Name: sorting.Menu
+ * Last Modification Date: 01/05/16 4:46 PM
  */
 
 package sorting;
@@ -291,7 +294,7 @@ class Menu {
      */
     private static void printArray(int[] arrayToPrint) {
         for (int n = 0; n < arrayToPrint.length; n++) {
-            if (n % 18 == 0) {
+            if (n % 10 == 0) {
                 System.out.print("\n");
             }
             System.out.print(arrayToPrint[n] + "\t");
