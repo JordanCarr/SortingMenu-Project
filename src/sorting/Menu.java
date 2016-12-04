@@ -105,8 +105,7 @@ class Menu {
         }
         double end = System.nanoTime();
         printArray(input);
-        System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
-                " milliseconds(s)\n");
+        printResults(iterations, start, end);
     }
 
     /**
@@ -128,8 +127,7 @@ class Menu {
         }
         double end = System.nanoTime();
         printArray(input);
-        System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
-                " milliseconds(s)\n");
+        printResults(iterations, start, end);
     }
 
     /**
@@ -153,8 +151,7 @@ class Menu {
         }
         double end = System.nanoTime();
         printArray(input);
-        System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
-                " milliseconds(s)\n");
+        printResults(iterations, start, end);
     }
 
     /**
@@ -167,8 +164,7 @@ class Menu {
         iterations = sortMergeSort(input, 0, (input.length - 1), iterations);
         double end = System.nanoTime();
         printArray(input);
-        System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
-                " milliseconds(s)\n");
+        printResults(iterations, start, end);
     }
 
     /**
@@ -180,8 +176,7 @@ class Menu {
      * @return Returns the number of iterations for the sort to complete.
      */
     private static long sortMergeSort(int[] input, int left, int right, long iterations) {
-        if (right == left) {
-            return iterations;}
+        if (right == left) return iterations;
         int middle = (left + right) / 2;
         iterations++;
         sortMergeSort(input, left, middle, iterations);
@@ -245,8 +240,7 @@ class Menu {
         iterations = sortQuickSort(input, left, right, iterations);
         double end = System.nanoTime();
         printArray(input);
-        System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
-                " milliseconds(s)\n");
+        printResults(iterations, start, end);
     }
 
     /**
@@ -258,9 +252,7 @@ class Menu {
      * @return Returns the number of iterations for the sort to complete.
      */
     private static long sortQuickSort(int[] input, int left, int right, long iterations) {
-        if (left >= right) {
-            return iterations;
-        }
+        if (left >= right) return iterations;
         int k = left;
         int j = right;
         int pivotValue = input[(left + right) / 2];
@@ -294,10 +286,13 @@ class Menu {
      */
     private static void printArray(int[] arrayToPrint) {
         for (int n = 0; n < arrayToPrint.length; n++) {
-            if (n % 10 == 0) {
-                System.out.print("\n");
-            }
+            if (n % 10 == 0) System.out.print("\n");
             System.out.print(arrayToPrint[n] + "\t");
         }
+    }
+
+    private static void printResults(long iterations, double start, double end) {
+        System.out.println("\nPermutations: " + iterations + "\nDuration: " + ((end - start) / 100000) +
+                " milliseconds(s)\n");
     }
 }
